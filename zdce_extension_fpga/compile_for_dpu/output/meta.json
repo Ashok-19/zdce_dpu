@@ -1,0 +1,8 @@
+{
+    "lib": "libvart-dpu-runner.so",
+    "filename": "zerodce_extension.xmodel",
+    "kernel": [
+        "subgraph_ZeroDCEQ__1467"
+    ],
+    "target": "DPUCZDX8G_ISA1_B4096"
+}
