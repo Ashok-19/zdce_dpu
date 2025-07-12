@@ -107,7 +107,7 @@ if __name__ == "__main__":
 	parser.add_argument('--scale_factor', type=int, default=1)
 	parser.add_argument('--snapshots_folder', type=str, default="snapshots_Zero_DCE++/")
 	parser.add_argument('--load_pretrain', type=bool, default= True)
-	parser.add_argument('--pretrain_dir', type=str, default= "snapshots_Zero_DCE++/Epoch199.pth")
+	parser.add_argument('--pretrain_dir', type=str, default= "snapshots_Zero_DCE++/2nd_train.pth")
 
 	config = parser.parse_args()
 
