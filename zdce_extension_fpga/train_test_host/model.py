@@ -42,8 +42,8 @@ class enhance_net_nopool(nn.Module):
 
 		self.relu = nn.ReLU(inplace=True)
 		self.scale_factor = scale_factor
-		self.upsample = nn.Upsample(scale_factor=4,mode='bilinear')
-		self.upsample_down = nn.Upsample(scale_factor=0.25, mode='bilinear')
+		self.upsample = nn.Upsample(scale_factor=scale_factor,mode='bilinear')
+		self.upsample_down = nn.Upsample(scale_factor=1/scale_factor, mode='bilinear')
 		number_f = 32
 
 #   zerodce DWC + p-shared
@@ -136,7 +136,7 @@ class enhance_net_nopool(nn.Module):
 		x = x + x_r*(torch.pow(x,2)-x)
 		enhance_image = x + x_r*(torch.pow(x,2)-x)	'''
 
-		return enhance_image
+		
 		
 	def forward(self, x):
 		if self.scale_factor==1:

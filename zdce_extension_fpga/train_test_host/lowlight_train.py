@@ -76,7 +76,24 @@ def train(config):
 			
 			optimizer.zero_grad()
 			loss.backward()
+
+			'''
+
+			total_norm = torch.norm(torch.stack([p.grad.norm(2) for p in DCE_net.parameters() if p.grad is not None])
+						   , 2).item()
+			print(f"Iteration {iteration+1} — Grad norm before clipping: {total_norm:.4f}")
+
+			'''
+
 			torch.nn.utils.clip_grad_norm(DCE_net.parameters(),config.grad_clip_norm)
+			
+			
+			'''
+			total_norm = torch.norm(torch.stack([p.grad.norm(2) for p in DCE_net.parameters() if p.grad is not None])
+						   , 2).item()
+			
+			print(f"Iteration {iteration+1} — Grad norm after clipping: {total_norm:.4f}")
+			'''
 			optimizer.step()
 
 			if ((iteration+1) % config.display_iter) == 0:
@@ -97,11 +114,11 @@ if __name__ == "__main__":
 	parser.add_argument('--lowlight_images_path', type=str, default="data/train_data/")
 	parser.add_argument('--lr', type=float, default=0.0001)
 	parser.add_argument('--weight_decay', type=float, default=0.0001)
-	parser.add_argument('--grad_clip_norm', type=float, default=0.3)
-	parser.add_argument('--num_epochs', type=int, default=120)
-	parser.add_argument('--train_batch_size', type=int, default=10)
-	parser.add_argument('--val_batch_size', type=int, default=10)
-	parser.add_argument('--num_workers', type=int, default=6)
+	parser.add_argument('--grad_clip_norm', type=float, default=0.1)
+	parser.add_argument('--num_epochs', type=int, default=100)
+	parser.add_argument('--train_batch_size', type=int, default=1)
+	parser.add_argument('--val_batch_size', type=int, default=1)
+	parser.add_argument('--num_workers', type=int, default=10)
 	parser.add_argument('--display_iter', type=int, default=10)
 	parser.add_argument('--snapshot_iter', type=int, default=10)
 	parser.add_argument('--scale_factor', type=int, default=1)
